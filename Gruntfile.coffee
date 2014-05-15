@@ -9,14 +9,15 @@ module.exports = (grunt) ->
       files:
         dependencies: [
           "js/vendor/modernizr-2.6.2.min.js","js/vendor/jquery-2.0.3.js",
-          "js/vendor/h5bp_helper.js","js/vendor/h5bp_plugins.js","js/vendor/underscore-min.js",
+          "js/vendor/h5bp_helper.js","js/vendor/h5bp_plugins.js","js/vendor/underscore.min.js",
           "js/vendor/backbone-min.js","js/vendor/handlebars.runtime.js",
           #<bootstrap>
           "vendor/bootstrap/js/transition.js", "vendor/bootstrap/js/alert.js", "vendor/bootstrap/js/button.js"
           "vendor/bootstrap/js/carousel.js", "vendor/bootstrap/js/collapse.js", "vendor/bootstrap/js/dropdown.js"
           "vendor/bootstrap/js/modal.js", "vendor/bootstrap/js/tooltip.js", "vendor/bootstrap/js/popover.js"
-          "vendor/bootstrap/js/scrollspy.js", "vendor/bootstrap/js/tab.js", "vendor/bootstrap/js/affix.js"
+          "vendor/bootstrap/js/scrollspy.js", "vendor/bootstrap/js/tab.js", "vendor/bootstrap/js/affix.js",
           #</bootstrap>
+          "js/html2canvas.min.js","js/vendor/StackBlur.js"
         ],
         app: [
           "js/src/app.js", "js/src/templates.js"
@@ -26,7 +27,7 @@ module.exports = (grunt) ->
         bare: true
       compile:
         files:
-          "js/src/app.js": ["js/coffee/*.coffee"]
+          "js/src/app.js": ["js/coffee/init.coffee", "js/coffee/router.coffee", "js/coffee/models.coffee", "js/coffee/views/*.coffee", "js/coffee/app.coffee", "js/coffee/main.coffee"]
     less:
       compile:
         options:
@@ -80,10 +81,10 @@ module.exports = (grunt) ->
     handlebars:
       compile:
         options:
-          namespace: "rsvp.templates"
+          namespace: "wk.templates"
           wrapped: true
           processName: (filename) ->
-            filename.substring 24, filename.length - 11 # removes the string ".handlebars" -- if the name changes from /templates, update this
+            filename.substring 22, filename.length - 11 # removes the string ".handlebars" -- if the name changes from /templates, update this
 
         files:
           "js/src/templates.js": ["templates/js/compiled/*.handlebars"]
